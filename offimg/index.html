@@ -1,0 +1,241 @@
+<!-- html -->
+<style>
+body {
+        background-color: #f0f0f0;
+        font-family: "MS PGothic", "IPAMonaPGothic", "Mona", sans-serif;
+        font-size: 16px;
+        line-height: 1.5;
+        color: #000;
+        margin: 0;
+        padding: 0;
+      }
+      .container {
+        width: 80%;
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 20px 0;
+      }
+      h1 {
+        font-size: 24px;
+        color: #800000;
+        padding: 10px 0;
+        margin: 0;
+      }
+      noscript {
+        color: teal;
+      }
+      .header {
+        margin-bottom: 15px;
+      }
+      button,
+      input {
+        background-color: #f0f0f0;
+        border: 1px solid #ccc;
+        padding: 8px 15px;
+        cursor: pointer;
+        font-weight: bold;
+        margin-right: 5px;
+        transition: 0.15s;
+      }
+      button:hover
+      ,input:hover {
+        background-color: #e9e9e9;
+      }
+      .donateBtn {
+        background-color: #e0e0e0;
+        border: 1px solid #ccc;
+        padding: 10px 20px;
+        cursor: pointer;
+        font-weight: bold;
+        color: #800000;
+        transition: 0.15s;
+      }
+      .donateBtn:hover {
+        background-color: #f0f0f0;
+      }
+      section {
+        //display: none;
+        padding: 10px 0;
+      }
+      section.active {
+        //display: block;
+      }
+      a {
+        text-decoration: none;
+        color: #0000ee;
+      }
+      a:hover {
+        text-decoration: underline;
+        color: #ee0000;
+      }
+      summary {
+        cursor: pointer;
+        color: #800000;
+      }
+      footer {
+        font-size: 12px;
+        color: #555;
+        margin-top: 30px;
+        padding: 10px 0;
+        border-top: 1px solid #ccc;
+      }
+      button,
+      input {
+        margin-bottom: 10px;
+      }
+      pre {
+        background: #1e1e1e;
+        color: #dcdcdc;
+        padding: 12px;
+        border-radius: 6px;
+        overflow-x: auto;
+      }
+      img {
+        max-width: 100%;
+        height: auto;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+      }
+      @media (max-width: 700px) {
+        .container {
+          width: 95%;
+        }
+        .header-buttons input {
+          margin-bottom: 6px;
+          display: inline-block;
+        }
+      }
+</style>
+<title>OffImg - create official-style icon / img, make credit or icon</title>
+<body>
+<h1>Make official-style img</h1>
+<p><strong>use for</strong><br>
+  official page<br>
+  credit</p>
+
+<div class="container">
+<div id="target" style="padding:20px; background:#fff;">
+<link
+                    rel="preconnect"
+                    href="https://fonts.gstatic.com"
+                    crossorigin
+                />
+                <link
+                    href="https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+                    rel="stylesheet"
+                />
+                <style>
+                    .logo {
+                        font-family: "Fira Sans", sans-serif;
+                        font-weight: 100;
+                        font-style: normal;
+                        vertical-align: top;
+                    }
+                    .logo_img {
+                        padding: 10px;
+                    }
+                </style>
+
+                <div
+                    class="logo"
+                    style="
+                        display: flex;
+                        align-items: center;
+                        gap: 20px;
+                        font-family: &quot;Fira Sans&quot;, sans-serif;
+                    "
+                >
+                    <img
+                        class="logo_img"
+                        src="/n.png"
+                        alt="Logo"
+                        style="height: 50px; width: auto; border: 0px"
+                    />
+                    <div>
+                        <h1
+                            style="
+                                font-size: 36px;
+                                font-weight: 500;
+                                margin: 0;
+                                line-height: 1.1;
+                            "
+                        >
+                            Tester
+                        </h1>
+                        <p
+                            style="
+                                margin: 0px 0 0 0;
+                                font-weight: 200;
+                                font-size: 16px;
+                                color: #555;
+                            "
+                        >
+                            High quality applications at low cost
+                        </p>
+                    </div>
+                </div>
+</div>
+<hr>
+<p>Img: <input type="file" id="img" accept="image/*" ></p>
+<p>Title: <input type="text" id="title_" ><input type="color" id="titleColor" value="#800000"></p>
+<p>Text: <input type="text" id="text_" ><input type="color" id="textColor" value="#555555"></p>
+<button id="reload" onclick="reload();">Reload</button>
+<button id="btn">Push to img</button>
+</div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<script>
+const imgInput = document.getElementById("img");
+const titleInput = document.getElementById("title_");
+const textInput = document.getElementById("text_");
+const titleColorInput = document.getElementById("titleColor");
+const textColorInput = document.getElementById("textColor");
+const target = document.getElementById("target");
+
+imgInput.addEventListener("change", (event) => {
+  const file = event.target.files[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+  reader.onload = () => {
+    const logoImg = target.querySelector(".logo_img");
+    if (logoImg) logoImg.src = reader.result;
+  };
+  reader.readAsDataURL(file);
+});
+
+function reload() {
+  const titleEl = target.querySelector(".logo h1");
+  const textEl = target.querySelector(".logo p");
+
+  if (titleEl) {
+    titleEl.textContent = titleInput.value || "Nyanthu";
+    titleEl.style.color = titleColorInput.value;
+  }
+  if (textEl) {
+    textEl.textContent = textInput.value || "High quality applications and games at low cost";
+    textEl.style.color = textColorInput.value;
+  }
+}
+
+document.getElementById("btn").addEventListener("click", async () => {
+  await document.fonts.ready;
+
+  html2canvas(target, {
+    useCORS: true,
+    scale: 2,
+    backgroundColor: null,
+  })
+    .then((canvas) => {
+      document.body.appendChild(canvas);
+      canvas.toBlob((blob) => {
+        const a = document.createElement("a");
+        a.href = URL.createObjectURL(blob);
+        a.download = "capture.png";
+        a.click();
+        URL.revokeObjectURL(a.href);
+      }, "image/png");
+    })
+    .catch((e) => console.error(e));
+});
+</script>
